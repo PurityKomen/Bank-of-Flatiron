@@ -1,27 +1,80 @@
-# BankOfFlatiron
+# Bank of Flatiron
+An angular application that displays a list of your recent bank transactions, among other features.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+## Setup
 
-## Development server
+- Run npm install in your terminal.
+- In a new terminal, run npm start. This will run your Angular App on port 4200
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Core Deliverables
 
-## Code scaffolding
+As a user, I should be able to:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. See a table of the transactions.
 
-## Build
+2. Fill out and submit the form to add a new transaction. This should add the new transaction to the table as well as post the new transaction to the backend API for persistence.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+3. Filter transactions by typing into the search bar. Only transactions with a description matching the search term should be shown in the transactions table.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Endpoints for Core Deliverables
 
-## Running end-to-end tests
+1. GET /transactions
+Example Response:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+[
+  {
+    "id": 1,
+    "date": "2019-12-01",
+    "description": "Paycheck from Bob's Burgers",
+    "category": "Income",
+    "amount": 1000
+  },
+  {
+    "id": 2,
+    "date": "2019-12-01",
+    "description": "South by Southwest Quinoa Bowl at Fresh & Co",
+    "category": "Food",
+    "amount": -10.55
+  }
+]
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+2. POST /transactions
+Required Headers:
+
+{
+  "Content-Type": "application/json"
+}
+Request Object:
+
+{
+  "date": "string",
+  "description": "string",
+  "category": "string",
+  "amount": number
+}
+Example Response:
+
+{
+  "id": 1,
+  "date": "2019-12-01",
+  "description": "Paycheck from Bob's Burgers",
+  "category": "Income",
+  "amount": 1000
+}
+
+## Advanced Deliverables
+
+As a user, I should be able to:
+
+1. Sort transactions alphabetically by category or description.
+
+2. Delete a transaction which will remove it from the table and delete it from the backend.
+
+## Endpoints for Advanced Deliverables
+
+1. DELETE /transactions/:id
+Example Response:
+
+{}
