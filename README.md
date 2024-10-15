@@ -6,6 +6,13 @@ An angular application that displays a list of your recent bank transactions, am
 - Run npm install in your terminal.
 - In a new terminal, run npm start. This will run your Angular App on port 4200
 
+## Technologies Used
+
+1. Angular(Frontend)
+2. Django(Backend)
+3. Bootstrap(Styling)
+4. VSCode(Editor)
+
 ## Core Deliverables
 
 As a user, I should be able to:
@@ -78,3 +85,6 @@ As a user, I should be able to:
 Example Response:
 
 {}
+
+## License
+This project uses MIT License
