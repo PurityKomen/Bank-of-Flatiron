@@ -1,35 +1,46 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from django.http import HttpResponse, JsonResponse
+from rest_framework.parsers import JSONParser
+from snippets.models import Transaction
 from.serializers import TransactionSerializer
-from django.contrib import messages
-from .forms import AddTransactionForm
 
-@api_view(['GET','POST'])
-def getRoutes(request):
-    routes = [
-        'GET /api',
-        'GET /api/transactions',
-        'GET /api/transactions/:id',
-        'POST /api/transactions/add',
-    ]
-    return Response(routes)
+def transaction_list(request):
+    """
+    List all transaction list or create a new transaction
+    """
+    if request.method == 'GET':
+        transaction = Transaction.objects.all()
+        serializer = TransactionSerializer(transaction, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-@api_view(['GET'])
-def getTransactions(request):
-    transactions = Transaction.objects.all()
-    serializer = TransactionSerializer(transactions, many=True)
-    return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = TransactionSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
-@api_view(['GET'])
-def getTransaction(request, pk):
-    transaction = Transaction.objects.get(id=pk)
-    serializer = TransactionSerializer(transaction, many=False)
-    return Response(serializer.data)
+def transaction_detail(request, pk):
+    """
+    Retrieve, update or delete a transaction
+    """
+    try:
+        transaction = Transaction.objects.get(pk=pk)
+    except Transaction.DoesNotExist:
+        return HttpResponse(status=404)
 
-@api_view(['POST'])
-def addTransactions(request):
-    form = AddTransactionForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            add_record = form.save()
-            messages.success(request, "Transaction Added...")
+    if request.method == 'GET':
+        serializer = TransactionSerializer(transaction)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = TransactionSerializer(transaction, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        transaction.delete()
+        return HttpResponse(status=204)

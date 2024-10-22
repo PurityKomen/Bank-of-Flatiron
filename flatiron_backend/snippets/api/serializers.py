@@ -1,7 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from snippets.models import Transaction
 
-class TransactionSerializer(ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Transaction
-        fields = '__all__'
+        fields = ['id', 'description', 'category', 'amount', 'date']
