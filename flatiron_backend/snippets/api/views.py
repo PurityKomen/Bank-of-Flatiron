@@ -2,7 +2,9 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from snippets.models import Transaction
 from.serializers import TransactionSerializer
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def transaction_list(request):
     """
     List all transaction list or create a new transaction
@@ -14,6 +16,7 @@ def transaction_list(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        print(f"python {data}")
         serializer = TransactionSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

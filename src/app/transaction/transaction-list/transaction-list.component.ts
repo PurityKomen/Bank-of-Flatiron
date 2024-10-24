@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TransactionListComponent implements OnInit {
   title = 'Bank of Flatiron';
-  url: string = 'http://127.0.0.1:8000/transactions/';
+  url: string = '/api/transactions/';
   transactions: any
 
   constructor(private http: HttpClient) {}
