@@ -1,12 +1,13 @@
 <div class="container m-4 p-3">
   <h3 class="bg-info text-white">{{title}}</h3>
-    <div>
+    <form>
       <input
         type="text"
         class="form-control m-3"
+        [ngModel]="searchText" (ngModelChange)="searchKey($event)" [ngModelOptions]="{standalone: true}"
         placeholder="Search your recent transactions"
       />
-    </div>
+    </form>
 
     <app-add-transactions></app-add-transactions>
   <table class="m-3 table table-striped table-bordered table-hover" >
@@ -20,7 +21,7 @@
     </thead>
     <tbody *ngFor="let transaction of transactions">
       <tr>
-        <th>{{transaction.date}}</th>
+        <th>{{transaction.date| date:'medium'}}</th>
         <td>{{transaction.description}}</td>
         <td>{{transaction.category}}</td>
         <td>{{transaction.amount}}</td>
