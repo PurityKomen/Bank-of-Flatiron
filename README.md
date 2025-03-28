@@ -1,6 +1,11 @@
 # Bank of Flatiron
 An angular application that displays a list of your recent bank transactions, among other features.
 
+## Live Link
+1. Django Rest APIs(Transactions API) - [https://bank-of-flatiron-be4s0a2ds-jepkorirpurity8gmailcoms-projects.vercel.app/transactions/](https://bank-of-flatiron-be4s0a2ds-jepkorirpurity8gmailcoms-projects.vercel.app/transactions/)
+
+
+
 ## Setup
 
 - Run npm install in your terminal.
@@ -12,6 +17,8 @@ An angular application that displays a list of your recent bank transactions, am
 2. Django(Backend)
 3. Bootstrap(Styling)
 4. VSCode(Editor)
+5. Vercel(Deployment)
+6. Rest APIs
 
 ## Core Deliverables
 

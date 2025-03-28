@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TransactionListComponent implements OnInit {
   title = 'Bank of Flatiron';
-  url: string = '';
+  url: string = 'https://bank-of-flatiron-be4s0a2ds-jepkorirpurity8gmailcoms-projects.vercel.app/transactions/';
   transactions: any
   searchText: string | undefined
 
