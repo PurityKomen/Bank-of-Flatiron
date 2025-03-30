@@ -16,7 +16,7 @@ export class AddTransactionsComponent implements OnInit {
   category: string | undefined;
   amount: number = 0;
   loading: boolean = false;
-  url: string = '/api/transactions/';
+  url: string = 'https://bank-of-flatiron-be4s0a2ds-jepkorirpurity8gmailcoms-projects.vercel.app/transactions/';
   addTransactionsForm!: FormGroup
 
   constructor(private http: HttpClient, public fb: FormBuilder) {}
